@@ -37,11 +37,7 @@
       <br><br>
       <table class="table table-striped">
         <thead>
-          <tr>
-            <th>Kota</th>
-            <th>Suhu</th>
-            <th>Perbedaan</th>
-          </tr>
+
         </thead>
         <tbody>
           <tr>
@@ -56,7 +52,6 @@
   </div>
   <script type="text/javascript">
 
-
   function searchData(){
     const appId = '271da6b323b05ebaf2b4aaa0f3378f89';
     let kota = $("#searchkota").val();
@@ -64,23 +59,37 @@
       url: `http://api.openweathermap.org/data/2.5/forecast?q=${kota}&q=&mode=json&units=metric&cnt=5&appid=${appId}`,
       method: "GET"
     }).done(data => {
-      console.log("API",data)
+      showCity(data);
+      showTable(add);
+      // console.log("API", data.list);
     })
   }
 
-  // function showTable(add){
-  //   var trHTML = '';
-  //       add.forEach(data => {
-  //         no++;
-  //         trHTML += `<tr>`;
-  //         trHTML += `<td>${no}</td>`;
-  //         trHTML += `<td>${data.dt}</td>`;
-  //         trHTML += `<td>${data.temp}</td>`;
-  //         trHTML += `<td>${(data.temp_max) - (data.temp_min)}</td>`;
-  //         trHTML += `</tr>`;
-  //       })
-  //       $('table tbody').html(trHTML);
-  // }
+  function showCity(add){
+    var trHTML = '';
+    add.forEach(data => {
+      trHTML += `<tr>`;
+      trHTML += `<th>${data.city.name}</th>`;
+      trHTML += `<th>Suhu</th>`;
+      trHTML += `<th>Perbedaan</th>`;
+      trHTML += `</tr>`;
+    })
+    $('table thead').html(trHTML);
+  }
+
+  function showTable(add){
+    var trHTML = '';
+        add.forEach(data => {
+          for (let i = 0; i <= data.list.length; i++) {
+            trHTML += `<tr>`;
+            trHTML += `<td>${data.list[i].dt}</td>`;
+            trHTML += `<td>${data.list[i].temp}</td>`;
+            trHTML += `<td>${(data.list[i].temp_max) - (data.list[i].temp_min)}</td>`;
+            trHTML += `</tr>`;
+          }
+        })
+        $('table tbody').html(trHTML);
+  }
 
   </script>
 </body>
