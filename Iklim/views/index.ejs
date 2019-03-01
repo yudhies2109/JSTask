@@ -1,11 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>Home</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--  jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+  <!-- Bootstrap Date-Picker Plugin -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+</head>
+
+<body>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="row text-center">
+        <h1>IKLIM</h1>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <form class="">
+        <div class="form-group">
+          <select class="form-control" name="kota" id="searchkota">
+            <option>Pilih Kota...</option>
+            <option>Jakarta</option>
+            <option>Singapore</option>
+            <option>Bangkok</option>
+          </select>
+        </div>
+        <button type="search" class="btn btn-primary">Search</button>
+      </form>
+
+      <br><br>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Kota</th>
+            <th>Suhu</th>
+            <th>Perbedaan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <a href="/" class="btn btn-warning">Clear</a>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+  function searchData(){
+    const appId = '271da6b323b05ebaf2b4aaa0f3378f89';
+    let kota = $("#searchkota").val();
+    $.ajax({
+      url: `http://api.openweathermap.org/data/2.5/forecast?q=${kota}&q=&mode=json&units=metric&cnt=5&appid=${appId}`,
+      method: "GET"
+    }).done(data => {
+      console.log("API",data)
+    })
+  }
+
+  // function showTable(add){
+  //   var trHTML = '';
+  //       add.forEach(data => {
+  //         no++;
+  //         trHTML += `<tr>`;
+  //         trHTML += `<td>${no}</td>`;
+  //         trHTML += `<td>${data.dt}</td>`;
+  //         trHTML += `<td>${data.temp}</td>`;
+  //         trHTML += `<td>${(data.temp_max) - (data.temp_min)}</td>`;
+  //         trHTML += `</tr>`;
+  //       })
+  //       $('table tbody').html(trHTML);
+  // }
+
+  </script>
+</body>
 </html>
