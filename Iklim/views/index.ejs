@@ -29,14 +29,9 @@
 
       <form class="">
         <div class="form-group">
-          <select class="form-control" name="kota" id="searchkota">
-            <option>Pilih Kota...</option>
-            <option>Jakarta</option>
-            <option>Singapore</option>
-            <option>Bangkok</option>
-          </select>
+          <input type="text" class="form-control" id="searchkota" placeholder="masukkan Kota">
         </div>
-        <button type="search" class="btn btn-primary">Search</button>
+        <button onclick="searchData()" class="btn btn-primary">Search</button>
       </form>
 
       <br><br>
@@ -60,6 +55,7 @@
     </div>
   </div>
   <script type="text/javascript">
+
 
   function searchData(){
     const appId = '271da6b323b05ebaf2b4aaa0f3378f89';
