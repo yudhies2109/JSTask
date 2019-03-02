@@ -27,11 +27,11 @@
     </div>
     <div class="panel-body">
 
-      <form class="">
+      <form id="add-search" class="">
         <div class="form-group">
           <input type="text" class="form-control" id="searchkota" placeholder="masukkan Kota">
         </div>
-        <button onclick="searchData()" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </form>
 
       <br><br>
@@ -40,11 +40,7 @@
 
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+
         </tbody>
       </table>
       <a href="/" class="btn btn-warning">Clear</a>
@@ -52,44 +48,51 @@
   </div>
   <script type="text/javascript">
 
+  $('#add-search').submit((e) => {
+    e.preventDefault()
+    searchData()
+  })
+
   function searchData(){
     const appId = '271da6b323b05ebaf2b4aaa0f3378f89';
     let kota = $("#searchkota").val();
     $.ajax({
-      url: `http://api.openweathermap.org/data/2.5/forecast?q=${kota}&q=&mode=json&units=metric&cnt=5&appid=${appId}`,
+      url: `http://api.openweathermap.org/data/2.5/forecast?q=${kota}&mode=json&units=metric&cnt=5&appid=${appId}`,
       method: "GET"
     }).done(data => {
-      showCity(data);
-      showTable(data);
-      // console.log("API", data.list);
+      let dataKota = data.city.name;
+      // let dataTable = data.list[0].weather[0].main;
+      showCity(dataKota);
+      //   // $("table thead").html(dataThead);
+      //
+      // showTable(data);
     })
   }
 
-  function showCity(add){
-    var trHTML = '';
-    add.forEach(data => {
-      trHTML += `<tr>`;
-      trHTML += `<th>${data.city.name}</th>`;
-      trHTML += `<th>Suhu</th>`;
-      trHTML += `<th>Perbedaan</th>`;
-      trHTML += `</tr>`;
-    })
-    $('table thead').html(trHTML);
+  function showCity(dataKota){
+    var thHTML = '';
+    thHTML += "<tr>";
+    thHTML += "<th>" + dataKota + "</th>";
+    thHTML += "<th> Suhu </th>";
+    thHTML += "<th> Perbedaan </th>";
+    thHTML += "</tr>";
+    // console.log("Replace HTML", thHTML);
+    $('table thead').html(thHTML);
   }
-
-  function showTable(add){
-    var trHTML = '';
-        add.forEach(data => {
-          for (let i = 0; i <= data.list.length; i++) {
-            trHTML += `<tr>`;
-            trHTML += `<td>${data.list[i].dt}</td>`;
-            trHTML += `<td>${data.list[i].temp}</td>`;
-            trHTML += `<td>${(data.list[i].temp_max) - (data.list[i].temp_min)}</td>`;
-            trHTML += `</tr>`;
-          }
-        })
-        $('table tbody').html(trHTML);
-  }
+  //
+  // function showTable(data){
+  //   var trHTML = '';
+  //       data.forEach(data => {
+  //         for (let i = 0; i <= data.list.length; i++) {
+  //           trHTML += `<tr>`;
+  //           trHTML += `<td>${data.list[i].dt}</td>`;
+  //           trHTML += `<td>${data.list[i].temp}</td>`;
+  //           trHTML += `<td>${(data.list[i].temp_max) - (data.list[i].temp_min)}</td>`;
+  //           trHTML += `</tr>`;
+  //         }
+  //       })
+  //       $("#event_table > tbody").html(trHTML);
+  // }
 
   </script>
 </body>
