@@ -61,11 +61,10 @@
       method: "GET"
     }).done(data => {
       let dataKota = data.city.name;
-      // let dataTable = data.list[0].weather[0].main;
+      let dataTable = data.list;
       showCity(dataKota);
-      //   // $("table thead").html(dataThead);
-      //
-      // showTable(data);
+      // console.log("DataTable", dataTable);
+      showTable(dataTable);
     })
   }
 
@@ -79,20 +78,20 @@
     // console.log("Replace HTML", thHTML);
     $('table thead').html(thHTML);
   }
-  //
-  // function showTable(data){
-  //   var trHTML = '';
-  //       data.forEach(data => {
-  //         for (let i = 0; i <= data.list.length; i++) {
-  //           trHTML += `<tr>`;
-  //           trHTML += `<td>${data.list[i].dt}</td>`;
-  //           trHTML += `<td>${data.list[i].temp}</td>`;
-  //           trHTML += `<td>${(data.list[i].temp_max) - (data.list[i].temp_min)}</td>`;
-  //           trHTML += `</tr>`;
-  //         }
-  //       })
-  //       $("#event_table > tbody").html(trHTML);
-  // }
+
+  function showTable(dataTable){
+    var thHTML = '';
+
+    for (var i = 0; i < dataTable.length; i++) {
+      thHTML += "<tr>";
+      thHTML += "<td>" + dataTable[i].dt + "</th>";
+      thHTML += "<th>" + dataTable[i].main.temp + "</th>";
+      thHTML += "<th>" + (dataTable[i].main.temp_max - dataTable[i].main.temp_min) + "</th>";
+      thHTML += "</tr>";
+    }
+    // console.log("nilaiTable", (dataTable[0].main.temp_max - dataTable[0].main.temp_min));
+    $('table tbody').html(thHTML);
+  }
 
   </script>
 </body>
