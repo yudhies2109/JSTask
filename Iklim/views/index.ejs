@@ -104,6 +104,7 @@
 
   function showTable(dataTable){
     var thHTML = '';
+    let rataSuhu = rataTemp(dataTable);
 
     for (var i = 0; i < dataTable.length; i++) {
       thHTML += "<tr>";
@@ -114,7 +115,7 @@
     }
 
     thHTML += "<td><strong>Rata-rata</strong></td>";
-    thHTML += "<td><strong>Suhu Rata-rata</strong></td>";
+    thHTML += "<td><strong>" + rataSuhu + "</strong></td>";
     thHTML += "<td><strong>Perbedaan Rata-rata</strong></td>";
 
 
