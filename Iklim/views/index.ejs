@@ -65,6 +65,7 @@
       showCity(dataKota);
       // console.log("DataTable", dataTable);
       showTable(dataTable);
+      // rataTemp(dataTable);
     })
   }
 
@@ -79,6 +80,28 @@
     $('table thead').html(thHTML);
   }
 
+  function rataTemp(dataTable){
+
+    let total = 0;
+    let nilai = getValue(dataTable);
+    nilai.forEach(function(score) {
+      total += score;
+    });
+
+    let pembagi = dataTable.length;
+    let Avg = total/pembagi;
+    // console.log("Rata Rata", Avg);
+    return Avg;
+  }
+
+  function getValue(dataTable){
+    let nilai =[];
+    for (var i = 0; i < dataTable.length; i++) {
+      nilai.push(dataTable[i].main.temp);
+    }
+    return nilai;
+  }
+
   function showTable(dataTable){
     var thHTML = '';
 
@@ -89,7 +112,14 @@
       thHTML += "<td>" + (dataTable[i].main.temp_max - dataTable[i].main.temp_min) + "</td>";
       thHTML += "</tr>";
     }
-    // console.log("nilaiTable", (dataTable[0].main.temp_max - dataTable[0].main.temp_min));
+
+    thHTML += "<td><strong>Rata-rata</strong></td>";
+    thHTML += "<td><strong>Suhu Rata-rata</strong></td>";
+    thHTML += "<td><strong>Perbedaan Rata-rata</strong></td>";
+
+
+
+    //console.log("nilaiTable", (dataTable[0].main.temp_max - dataTable[0].main.temp_min));
     $('table tbody').html(thHTML);
   }
 
