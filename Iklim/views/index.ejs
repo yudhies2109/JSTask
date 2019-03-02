@@ -70,6 +70,19 @@
   }
 
   function rataDiff(dataTable){
+    function getDiffrent(dataTable){
+      let nilaiDif = [];
+
+      for (var i = 0; i < dataTable.length; i++) {
+        let nilaiMax = dataTable[i].main.temp_max;
+        let nilaiMin = dataTable[i].main.temp_min;
+        let nilaiPerbed = (nilaiMax - nilaiMin);
+        nilaiDif.push(nilaiPerbed);
+      }
+      // console.log("Isi data", nilaiDif);
+      return nilaiDif;
+    }
+
     let total = 0;
     let arrNilai = getDiffrent(dataTable);
     arrNilai.forEach(function(score) {
@@ -82,18 +95,6 @@
     return avgDiff;
   }
 
-  function getDiffrent(dataTable){
-    let nilaiDif = [];
-
-    for (var i = 0; i < dataTable.length; i++) {
-      let nilaiMax = dataTable[i].main.temp_max;
-      let nilaiMin = dataTable[i].main.temp_min;
-      let nilaiPerbed = (nilaiMax - nilaiMin);
-      nilaiDif.push(nilaiPerbed);
-    }
-    // console.log("Isi data", nilaiDif);
-    return nilaiDif;
-  }
 
   function showCity(dataKota){
     var thHTML = '';
@@ -107,6 +108,13 @@
   }
 
   function rataTemp(dataTable){
+    function getValue(dataTable){
+      let nilai =[];
+      for (var i = 0; i < dataTable.length; i++) {
+        nilai.push(dataTable[i].main.temp);
+      }
+      return nilai;
+    }
 
     let total = 0;
     let nilai = getValue(dataTable);
@@ -120,13 +128,7 @@
     return Avg;
   }
 
-  function getValue(dataTable){
-    let nilai =[];
-    for (var i = 0; i < dataTable.length; i++) {
-      nilai.push(dataTable[i].main.temp);
-    }
-    return nilai;
-  }
+
 
   function showTable(dataTable){
     var thHTML = '';
